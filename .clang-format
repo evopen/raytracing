@@ -33,7 +33,7 @@ AlignTrailingComments: false
 # AllowShortCaseLabelsOnASingleLine: false
 
 # AllowShortFunctionsOnASingleLine: All
-AllowShortFunctionsOnASingleLine: None
+AllowShortFunctionsOnASingleLine: InlineOnly
 
 # AllowShortLambdasOnASingleLine: All
 # AllowShortIfStatementsOnASingleLine: Never
