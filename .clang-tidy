@@ -1,6 +1,7 @@
 Checks: >
     *,
-    -fuchsia-*
+    -fuchsia-*,
+    -llvm-header-guard
 
 HeaderFilterRegex: .*
 

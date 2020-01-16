@@ -1,7 +1,8 @@
+#include "vec3.hpp"
+
 #include <filesystem>
 #include <fstream>
 #include <iostream>
-#include "vec3.hpp"
 
 auto main() noexcept -> int
 {
