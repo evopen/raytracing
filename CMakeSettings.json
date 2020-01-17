@@ -11,7 +11,8 @@
       "buildCommandArgs": "-v",
       "ctestCommandArgs": "",
       "variables": [],
-      "enableClangTidyCodeAnalysis": true
+      "enableClangTidyCodeAnalysis": true,
+      "clangTidyChecks": "-*,readability-*,bugprone-*"
     },
     {
       "name": "x64-Release",
@@ -38,8 +39,7 @@
       "inheritEnvironments": [ "linux_x64" ],
       "wslPath": "${defaultWSLPath}",
       "addressSanitizerRuntimeFlags": "detect_leaks=0",
-      "variables": [],
-      "cmakeToolchain": "/opt/vcpkg/scripts/buildsystems/vcpkg.cmake"
+      "variables": []
     }
   ]
 }
