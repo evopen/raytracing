@@ -10,121 +10,37 @@ class Vec3
 public:
     Vec3() = default;
 
-    Vec3(float e0, float e1, float e2) : e_{e0, e1, e2} {}
+    Vec3(float e0, float e1, float e2);
 
-    [[nodiscard]] inline auto X() const -> float { return e_[0]; }
-    [[nodiscard]] inline auto Y() const -> float { return e_[1]; }
-    [[nodiscard]] inline auto Z() const -> float { return e_[2]; }
-    [[nodiscard]] inline auto R() const -> float { return e_[0]; }
-    [[nodiscard]] inline auto G() const -> float { return e_[1]; }
-    [[nodiscard]] inline auto B() const -> float { return e_[2]; }
+    auto X() const -> float;
+    auto Y() const -> float;
+    auto Z() const -> float;
+    auto R() const -> float;
+    auto G() const -> float;
+    auto B() const -> float;
+    auto Length() const -> float;
+    auto SquareLength() const -> float;
 
-    inline auto operator[](const int kI) const -> float { return gsl::at(e_, kI); }
-    inline auto operator[](const int kI) -> float& { return gsl::at(e_, kI); }
-
-    inline Vec3& operator+=(Vec3& v)
-    {
-        e_[0] += v[0];
-        e_[1] += v[1];
-        e_[2] += v[2];
-        return *this;
-    }
-
-    inline Vec3& operator-=(Vec3& v)
-    {
-        e_[0] -= v[0];
-        e_[1] -= v[1];
-        e_[2] -= v[2];
-        return *this;
-    }
-
-    inline Vec3& operator*=(Vec3& v)
-    {
-        e_[0] *= v[0];
-        e_[1] *= v[1];
-        e_[2] *= v[2];
-        return *this;
-    }
-
-    inline Vec3& operator*=(float t)
-    {
-        e_[0] *= t;
-        e_[1] *= t;
-        e_[2] *= t;
-        return *this;
-    }
-
-    inline Vec3& operator/=(Vec3& v)
-    {
-        e_[0] /= v[0];
-        e_[1] /= v[1];
-        e_[2] /= v[2];
-        return *this;
-    }
-
-    inline Vec3& operator/=(float t)
-    {
-        float k = 1 / t;
-        e_[0] *= t;
-        e_[1] *= t;
-        e_[2] *= t;
-        return *this;
-    }
-
-    [[nodiscard]] inline auto Length() const -> float { return sqrt(SquareLength()); }
-    [[nodiscard]] inline auto SquareLength() const -> float { return e_[0] * e_[0] + e_[1] * e_[1] + e_[2] * e_[2]; }
+    auto operator[](const int kI) const -> float;
+    auto operator[](const int kI) -> float&;
+    auto operator+=(Vec3& v) -> Vec3&;
+    auto operator-=(Vec3& v) -> Vec3&;
+    auto operator*=(Vec3& v) -> Vec3&;
+    auto operator*=(float t) -> Vec3&;
+    auto operator/=(Vec3& v) -> Vec3&;
+    auto operator/=(float t) -> Vec3&;
 
 private:
     std::array<float, 3> e_;
 };
 
-inline Vec3 operator+(const Vec3& v1, const Vec3& v2)
-{
-    return Vec3(v1[0] + v2[0], v1[1] + v2[1], v1[2] + v2[2]);
-}
-
-inline Vec3 operator-(const Vec3& v1, const Vec3& v2)
-{
-    return Vec3(v1[0] - v2[0], v1[1] - v2[1], v1[2] - v2[2]);
-}
-
-inline Vec3 operator*(const Vec3& v1, const Vec3& v2)
-{
-    return Vec3(v1[0] * v2[0], v1[1] * v2[1], v1[2] * v2[2]);
-}
-
-inline Vec3 operator*(float t, const Vec3& v)
-{
-    return Vec3(t * v[0], t * v[1], t * v[2]);
-}
-
-inline Vec3 operator*(const Vec3& v, float t)
-{
-    return Vec3(t * v[0], t * v[1], t * v[2]);
-}
-
-inline Vec3 operator/(const Vec3& v1, const Vec3& v2)
-{
-    return Vec3(v1[0] / v2[0], v1[1] / v2[1], v1[2] / v2[2]);
-}
-
-inline Vec3 operator/(const Vec3& v, const float t)
-{
-    return Vec3(v[0] / t, v[1] / t, v[2] / t);
-}
-
-
-inline float dot(const Vec3& v1, const Vec3& v2)
-{
-    return v1[0] * v2[0] + v1[1] * v2[1] + v1[2] + v2[2];
-}
-
-inline Vec3 cross(const Vec3& v1, const Vec3& v2)
-{
-    return Vec3(v1[1] * v2[2] - v1[2] * v2[1], v1[2] * v2[0] - v1[0] * v2[2], v1[0] * v2[1] - v1[1] * v2[0]);
-}
-
-inline Vec3 UnitVector(const Vec3& v)
-{
-    return v / v.Length();
-}
+auto operator+(const Vec3& v1, const Vec3& v2) -> Vec3;
+auto operator-(const Vec3& v1, const Vec3& v2) -> Vec3;
+auto operator*(const Vec3& v1, const Vec3& v2) -> Vec3;
+auto operator*(float t, const Vec3& v) -> Vec3;
+auto operator*(const Vec3& v, float t) -> Vec3;
+auto operator/(const Vec3& v1, const Vec3& v2) -> Vec3;
+auto operator/(const Vec3& v, const float t) -> Vec3;
+auto Dot(const Vec3& v1, const Vec3& v2) -> float;
+auto Cross(const Vec3& v1, const Vec3& v2) -> Vec3;
+auto UnitVector(const Vec3& v) -> Vec3;

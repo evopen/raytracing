@@ -15,12 +15,12 @@ if(GSL_INCLUDE_DIR STREQUAL "GSL_INCLUDE_DIR-NOTFOUND")
 endif()
 include_directories(${GSL_INCLUDE_DIR})
 
+set(SOURCE_DIR "${CMAKE_CURRENT_LIST_DIR}/src")
+set(TEST_DIR "${CMAKE_CURRENT_LIST_DIR}/test")
 
-include_directories("src")
-
-add_subdirectory("src")
+add_subdirectory(${SOURCE_DIR})
 
 include(CTest)
 if(BUILD_TESTING)
-	add_subdirectory("test")
+	add_subdirectory(${TEST_DIR})
 endif()
