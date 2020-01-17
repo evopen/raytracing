@@ -8,5 +8,4 @@ find_package(GTest CONFIG REQUIRED)
 target_link_libraries(${BINARY} PRIVATE GTest::gtest GTest::gtest_main GTest::gmock GTest::gmock_main)
 
 include(GoogleTest)
-gtest_discover_tests(${BINARY} 
-	EXTRA_ARGS ${GTEST_ARGS})
+gtest_discover_tests(${BINARY})

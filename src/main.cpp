@@ -25,12 +25,10 @@ auto main() noexcept -> int
         {
             for (int j = 0; j < kNx; j++)  // for every column
             {
-                auto r  = static_cast<float>(j) / kNx;
-                auto g  = static_cast<float>(i) / kNy;
-                float b = kBlueValue;
-                int ir  = static_cast<int>(r * kMaxColor);
-                int ig  = static_cast<int>(g * kMaxColor);
-                int ib  = static_cast<int>(b * kMaxColor);
+                Vec3 color(static_cast<float>(j) / kNx, static_cast<float>(i) / kNy, kBlueValue);
+                int ir  = static_cast<int>(color.R() * kMaxColor);
+                int ig  = static_cast<int>(color.G() * kMaxColor);
+                int ib  = static_cast<int>(color.B() * kMaxColor);
                 fs << ir << ' ' << ig << ' ' << ' ' << ib << "\t";
             }
             fs << "\n";
