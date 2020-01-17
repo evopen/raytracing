@@ -72,9 +72,9 @@ auto Vec3::operator/=(Vec3& v) -> Vec3&
 auto Vec3::operator/=(float t) -> Vec3&
 {
     float k = 1 / t;
-    e_[0] *= t;
-    e_[1] *= t;
-    e_[2] *= t;
+    e_[0] *= k;
+    e_[1] *= k;
+    e_[2] *= k;
     return *this;
 }
 
@@ -134,7 +134,7 @@ auto operator/(const Vec3& v, const float t) -> Vec3
 
 auto Dot(const Vec3& v1, const Vec3& v2) -> float
 {
-    return v1[0] * v2[0] + v1[1] * v2[1] + v1[2] + v2[2];
+    return v1[0] * v2[0] + v1[1] * v2[1] + v1[2] * v2[2];
 }
 
 auto Cross(const Vec3& v1, const Vec3& v2) -> Vec3
