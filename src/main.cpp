@@ -6,23 +6,35 @@
 #include <iostream>
 
 
-auto HitSphere(const Vec3& center, const float kRadius, const Ray& ray) -> bool
+// return the coefficient of ray direction to the hit point
+auto HitSphere(const Vec3& center, const float kRadius, const Ray& ray) -> float
 {
-
     float a = Dot(ray.Direction(), ray.Direction());
     float b = 2 * Dot(ray.Origin() - center, ray.Direction());
     float c = Dot(ray.Origin() - center, ray.Origin() - center) - kRadius * kRadius;
 
     float discriminant = b * b - 4 * a * c;
-    return discriminant > 0;
+
+    if (discriminant < 0)
+    {
+        return -1;
+    }
+    else  // solve t in quadratic equation using quadratic formula
+    {
+        return (-b - sqrt(discriminant)) / (2 * a);
+    }
 }
 
 
 auto Color(const Ray& ray) -> Vec3
 {
-    if (HitSphere(Vec3(0, 0, -1), 0.5, ray))
+    const Vec3 kSphereCenter  = Vec3(0, 0, -1);
+    const float kSphereRadius = 0.5;
+    float t                   = HitSphere(kSphereCenter, kSphereRadius, ray);
+    if (t > 0)
     {
-        return Vec3(1, 0, 0);
+        Vec3 normal = UnitVector(ray.PointAtParameter(t) - kSphereCenter);
+        return 0.5 * (normal + 1.f);
     }
     Vec3 direction    = UnitVector(ray.Direction());
     float color_ratio = 0.5 * (direction.Y() + 1.f);
