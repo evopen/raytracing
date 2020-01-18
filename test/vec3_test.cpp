@@ -23,24 +23,40 @@ class Vec3OperatorTest : public ::testing::Test
 protected:
     void SetUp() override
     {
-        v1 = Vec3(2.3F, 3.8F, 4.4F);
-        v2 = Vec3(34.5F, 234.F, 53.9F);
+        v1_ = Vec3(2.3, 3.8, 4.4);
+        v2_ = Vec3(34.5, 234., 53.9);
     }
 
-    Vec3 v1, v2;
+    Vec3 v1_, v2_;
 };
 
-TEST_F(Vec3OperatorTest, OperatorAdd)
+TEST_F(Vec3OperatorTest, OperatorAddVec3)
 {
-    Vec3 v0 = v1 + v2;
+    Vec3 v0 = v1_ + v2_;
     EXPECT_NEAR(v0[0], 36.8, 0.001);
     EXPECT_NEAR(v0[1], 237.8, 0.001);
     EXPECT_NEAR(v0[2], 58.3, 0.001);
 }
 
+TEST_F(Vec3OperatorTest, OperatorAddScalarR)
+{
+    Vec3 v0 = v1_ + 3.5;
+    EXPECT_NEAR(v0[0], 5.8, 0.001);
+    EXPECT_NEAR(v0[1], 7.3, 0.001);
+    EXPECT_NEAR(v0[2], 7.9, 0.001);
+}
+
+TEST_F(Vec3OperatorTest, OperatorAddScalarL)
+{
+    Vec3 v0 = 3.5 + v1_;
+    EXPECT_NEAR(v0[0], 5.8, 0.001);
+    EXPECT_NEAR(v0[1], 7.3, 0.001);
+    EXPECT_NEAR(v0[2], 7.9, 0.001);
+}
+
 TEST_F(Vec3OperatorTest, OperatorSubtract)
 {
-    Vec3 v0 = v2 - v1;
+    Vec3 v0 = v2_ - v1_;
     EXPECT_NEAR(v0[0], 32.2, 0.001);
     EXPECT_NEAR(v0[1], 230.2, 0.001);
     EXPECT_NEAR(v0[2], 49.5, 0.001);
@@ -48,23 +64,23 @@ TEST_F(Vec3OperatorTest, OperatorSubtract)
 
 TEST_F(Vec3OperatorTest, CompoundOperatorAdd)
 {
-    v1 += v2;
-    EXPECT_NEAR(v1[0], 36.8, 0.001);
-    EXPECT_NEAR(v1[1], 237.8, 0.001);
-    EXPECT_NEAR(v1[2], 58.3, 0.001);
+    v1_ += v2_;
+    EXPECT_NEAR(v1_[0], 36.8, 0.001);
+    EXPECT_NEAR(v1_[1], 237.8, 0.001);
+    EXPECT_NEAR(v1_[2], 58.3, 0.001);
 }
 
 TEST_F(Vec3OperatorTest, CompoundOperatorSubtract)
 {
-    v1 -= v2;
-    EXPECT_NEAR(v1[0], -32.2, 0.001);
-    EXPECT_NEAR(v1[1], -230.2, 0.001);
-    EXPECT_NEAR(v1[2], -49.5, 0.001);
+    v1_ -= v2_;
+    EXPECT_NEAR(v1_[0], -32.2, 0.001);
+    EXPECT_NEAR(v1_[1], -230.2, 0.001);
+    EXPECT_NEAR(v1_[2], -49.5, 0.001);
 }
 
 TEST_F(Vec3OperatorTest, OperatorMultiplicationScalarL)
 {
-    Vec3 result = 1.2 * v1;
+    Vec3 result = 1.2 * v1_;
     EXPECT_NEAR(result[0], 2.76, 0.1);
     EXPECT_NEAR(result[1], 4.56, 0.1);
     EXPECT_NEAR(result[2], 5.28, 0.1);
@@ -72,7 +88,7 @@ TEST_F(Vec3OperatorTest, OperatorMultiplicationScalarL)
 
 TEST_F(Vec3OperatorTest, OperatorMultiplicationScalarR)
 {
-    Vec3 result = v1 * 3;
+    Vec3 result = v1_ * 3;
     EXPECT_NEAR(result[0], 6.9, 0.1);
     EXPECT_NEAR(result[1], 11.4, 0.1);
     EXPECT_NEAR(result[2], 13.2, 0.1);
@@ -80,7 +96,7 @@ TEST_F(Vec3OperatorTest, OperatorMultiplicationScalarR)
 
 TEST_F(Vec3OperatorTest, OperatorMultiplicationVec3)
 {
-    Vec3 v3 = v1 * v2;
+    Vec3 v3 = v1_ * v2_;
     EXPECT_NEAR(v3[0], 79.35, 0.1);
     EXPECT_NEAR(v3[1], 889.2, 0.1);
     EXPECT_NEAR(v3[2], 237.16, 0.1);
@@ -88,39 +104,39 @@ TEST_F(Vec3OperatorTest, OperatorMultiplicationVec3)
 
 TEST_F(Vec3OperatorTest, CompoundOperatorMultiplicationScalar)
 {
-    v1 *= 2.3;
-    EXPECT_NEAR(v1[0], 5.29, 0.1);
-    EXPECT_NEAR(v1[1], 8.74, 0.1);
-    EXPECT_NEAR(v1[2], 10.12, 0.1);
+    v1_ *= 2.3;
+    EXPECT_NEAR(v1_[0], 5.29, 0.1);
+    EXPECT_NEAR(v1_[1], 8.74, 0.1);
+    EXPECT_NEAR(v1_[2], 10.12, 0.1);
 }
 
 TEST_F(Vec3OperatorTest, CompoundOperatorMultiplicationVec3)
 {
-    v1 *= v2;
-    EXPECT_NEAR(v1[0], 79.35, 0.1);
-    EXPECT_NEAR(v1[1], 889.2, 0.1);
-    EXPECT_NEAR(v1[2], 237.16, 0.1);
+    v1_ *= v2_;
+    EXPECT_NEAR(v1_[0], 79.35, 0.1);
+    EXPECT_NEAR(v1_[1], 889.2, 0.1);
+    EXPECT_NEAR(v1_[2], 237.16, 0.1);
 }
 
 TEST_F(Vec3OperatorTest, CompoundOperatorDivisionScalar)
 {
-    v1 /= 9.8;
-    EXPECT_NEAR(v1[0], 0.23469388, 0.1);
-    EXPECT_NEAR(v1[1], 0.3877551, 0.1);
-    EXPECT_NEAR(v1[2], 0.44897959, 0.1);
+    v1_ /= 9.8;
+    EXPECT_NEAR(v1_[0], 0.23469388, 0.1);
+    EXPECT_NEAR(v1_[1], 0.3877551, 0.1);
+    EXPECT_NEAR(v1_[2], 0.44897959, 0.1);
 }
 
 TEST_F(Vec3OperatorTest, CompoundOperatorDivisionVec3)
 {
-    v1 /= v2;
-    EXPECT_NEAR(v1[0], 0.06666, 0.1);
-    EXPECT_NEAR(v1[1], 0.016239, 0.1);
-    EXPECT_NEAR(v1[2], 0.08163, 0.1);
+    v1_ /= v2_;
+    EXPECT_NEAR(v1_[0], 0.06666, 0.1);
+    EXPECT_NEAR(v1_[1], 0.016239, 0.1);
+    EXPECT_NEAR(v1_[2], 0.08163, 0.1);
 }
 
 TEST_F(Vec3OperatorTest, OperatorDivision)
 {
-    Vec3 v3 = v2 / v1;
+    Vec3 v3 = v2_ / v1_;
     EXPECT_NEAR(v3[0], 15, 0.1);
     EXPECT_NEAR(v3[1], 61.578947, 0.1);
     EXPECT_NEAR(v3[2], 12.25, 0.1);
