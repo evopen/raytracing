@@ -6,14 +6,16 @@
 
 #include <filesystem>
 #include <fstream>
+#include <iomanip>
 #include <iostream>
+#include <limits>
 
 
 auto Color(const Ray& ray, Hittable* hittable) -> Vec3
 {
     HitRecord rec;
 
-    if (hittable->Hit(ray, 0, FLT_MAX, rec))
+    if (hittable->Hit(ray, 0, std::numeric_limits<float>::max(), rec))
     {
         return 0.5 * (rec.normal + 1);
     }
