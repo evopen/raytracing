@@ -78,13 +78,13 @@ auto Vec3::operator/=(float t) -> Vec3&
     return *this;
 }
 
-auto Vec3::operator[](const int kI) const -> float
+auto Vec3::operator[](int i) const -> float
 {
-    return gsl::at(e_, kI);
+    return e_[i];
 }
-auto Vec3::operator[](const int kI) -> float&
+auto Vec3::operator[](int i) -> float&
 {
-    return gsl::at(e_, kI);
+    return e_[i];
 }
 
 auto Vec3::Length() const -> float

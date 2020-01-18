@@ -2,7 +2,6 @@
 
 #include <array>
 #include <cmath>
-#include <gsl/gsl>
 #include <iostream>
 
 class Vec3
@@ -36,7 +35,7 @@ private:
 
 auto operator+(const Vec3& v1, const Vec3& v2) -> Vec3;
 auto operator+(const Vec3& v1, const float t) -> Vec3;
-auto operator+(const float t,const Vec3& v1) -> Vec3;
+auto operator+(const float t, const Vec3& v1) -> Vec3;
 auto operator-(const Vec3& v1, const Vec3& v2) -> Vec3;
 auto operator*(const Vec3& v1, const Vec3& v2) -> Vec3;
 auto operator*(float t, const Vec3& v) -> Vec3;
