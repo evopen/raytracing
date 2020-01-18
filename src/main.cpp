@@ -1,14 +1,26 @@
+#include "ray.h"
 #include "vec3.h"
 
 #include <filesystem>
 #include <fstream>
 #include <iostream>
 
+Vec3 Color(const Ray& ray)
+{
+    Vec3 direction    = UnitVector(ray.Direction());
+    float color_ratio = 0.5 * (direction.Y() + 1.f);
+    return color_ratio * Vec3(1, 0.2, 0.2) + (1 - color_ratio) * Vec3(1, 1, 1);
+}
+
 auto main() noexcept -> int
 {
     try
     {
-        std::cout << std::filesystem::current_path();
+        Vec3 origin(0.F, 0.F, 0.F);
+        Vec3 lower_left_corner(-2.f, -1.f, -1.f);
+        Vec3 vertical(0, 2.f, 0);
+        Vec3 horizontal(4.f, 0, 0);
+
         std::ofstream fs("result.ppm", std::fstream::out);
         if (!fs)
         {
@@ -25,10 +37,13 @@ auto main() noexcept -> int
         {
             for (int j = 0; j < kNx; j++)  // for every column
             {
-                Vec3 color(static_cast<float>(j) / kNx, static_cast<float>(i) / kNy, kBlueValue);
-                int ir  = static_cast<int>(color.R() * kMaxColor);
-                int ig  = static_cast<int>(color.G() * kMaxColor);
-                int ib  = static_cast<int>(color.B() * kMaxColor);
+                float u = (float)j / kNx;
+                float v = (float)i / kNy;
+                Ray r(origin, Vec3(lower_left_corner + u * horizontal + v * vertical));
+                Vec3 col = Color(r);
+                int ir   = static_cast<int>(col.R() * kMaxColor);
+                int ig   = static_cast<int>(col.G() * kMaxColor);
+                int ib   = static_cast<int>(col.B() * kMaxColor);
                 fs << ir << ' ' << ig << ' ' << ' ' << ib << "\t";
             }
             fs << "\n";

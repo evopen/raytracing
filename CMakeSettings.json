@@ -12,7 +12,7 @@
       "ctestCommandArgs": "",
       "variables": [],
       "enableClangTidyCodeAnalysis": true,
-      "clangTidyChecks": "-*,readability-identifier-*",
+      "clangTidyChecks": "-*,readability-identifier-*,bugprone-*",
       "enableMicrosoftCodeAnalysis": false
     },
     {
