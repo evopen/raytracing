@@ -12,7 +12,8 @@
       "ctestCommandArgs": "",
       "variables": [],
       "enableClangTidyCodeAnalysis": true,
-      "clangTidyChecks": "-*,readability-*,bugprone-*"
+      "clangTidyChecks": "-*,readability-identifier-*",
+      "enableMicrosoftCodeAnalysis": false
     },
     {
       "name": "x64-Release",

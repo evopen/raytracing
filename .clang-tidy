@@ -1,7 +1,15 @@
 Checks: >
     *,
+    -abseil-*,
+    -android-*,
+    -boost-*,
     -fuchsia-*,
-    -llvm-header-guard
+    -mpi-*
+    -objc-*,
+    -openmp-*
+    -zircon-*,
+    -llvm-header-guard,
+    -modernize-use-nodiscard
 
 HeaderFilterRegex: src/*
 
