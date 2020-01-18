@@ -5,8 +5,25 @@
 #include <fstream>
 #include <iostream>
 
-Vec3 Color(const Ray& ray)
+
+auto HitSphere(const Vec3& center, const float kRadius, const Ray& ray) -> bool
 {
+
+    float a = Dot(ray.Direction(), ray.Direction());
+    float b = 2 * Dot(ray.Origin() - center, ray.Direction());
+    float c = Dot(ray.Origin() - center, ray.Origin() - center) - kRadius * kRadius;
+
+    float discriminant = b * b - 4 * a * c;
+    return discriminant > 0;
+}
+
+
+auto Color(const Ray& ray) -> Vec3
+{
+    if (HitSphere(Vec3(0, 0, -1), 0.5, ray))
+    {
+        return Vec3(1, 0, 0);
+    }
     Vec3 direction    = UnitVector(ray.Direction());
     float color_ratio = 0.5 * (direction.Y() + 1.f);
     return color_ratio * Vec3(1, 0.2, 0.2) + (1 - color_ratio) * Vec3(1, 1, 1);
@@ -37,8 +54,8 @@ auto main() noexcept -> int
         {
             for (int j = 0; j < kNx; j++)  // for every column
             {
-                float u = (float)j / kNx;
-                float v = (float)i / kNy;
+                float u = (float) j / kNx;
+                float v = (float) i / kNy;
                 Ray r(origin, Vec3(lower_left_corner + u * horizontal + v * vertical));
                 Vec3 col = Color(r);
                 int ir   = static_cast<int>(col.R() * kMaxColor);
