@@ -21,8 +21,8 @@ public:
     auto Length() const -> float;
     auto SquareLength() const -> float;
 
-    auto operator[](const int kI) const -> float;
-    auto operator[](const int kI) -> float&;
+    auto operator[](int kI) const -> float;
+    auto operator[](int kI) -> float&;
     auto operator+=(Vec3& v) -> Vec3&;
     auto operator-=(Vec3& v) -> Vec3&;
     auto operator*=(Vec3& v) -> Vec3&;
@@ -40,7 +40,7 @@ auto operator*(const Vec3& v1, const Vec3& v2) -> Vec3;
 auto operator*(float t, const Vec3& v) -> Vec3;
 auto operator*(const Vec3& v, float t) -> Vec3;
 auto operator/(const Vec3& v1, const Vec3& v2) -> Vec3;
-auto operator/(const Vec3& v, const float t) -> Vec3;
+auto operator/(const Vec3& v, float t) -> Vec3;
 auto Dot(const Vec3& v1, const Vec3& v2) -> float;
 auto Cross(const Vec3& v1, const Vec3& v2) -> Vec3;
 auto UnitVector(const Vec3& v) -> Vec3;
