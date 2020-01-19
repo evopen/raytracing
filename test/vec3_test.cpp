@@ -142,6 +142,13 @@ TEST_F(Vec3OperatorTest, OperatorDivision)
     EXPECT_NEAR(v3[2], 12.25, 0.1);
 }
 
+TEST_F(Vec3OperatorTest, OperatorEquality)
+{
+    Vec3 v = Vec3(2.3000001, 3.7999999, 4.4);
+    EXPECT_TRUE(v == v1_);
+    EXPECT_FALSE(v1_== v2_);
+}
+
 TEST(Vec3Test, UnitVector)
 {
     Vec3 v(2, 3, 4);

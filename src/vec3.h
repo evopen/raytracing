@@ -42,6 +42,7 @@ auto operator*(float t, const Vec3& v) -> Vec3;
 auto operator*(const Vec3& v, float t) -> Vec3;
 auto operator/(const Vec3& v1, const Vec3& v2) -> Vec3;
 auto operator/(const Vec3& v, float t) -> Vec3;
+auto operator==(const Vec3& v1, const Vec3& v2) -> bool;
 auto Dot(const Vec3& v1, const Vec3& v2) -> float;
 auto Cross(const Vec3& v1, const Vec3& v2) -> Vec3;
 auto UnitVector(const Vec3& v) -> Vec3;
