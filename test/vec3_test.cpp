@@ -64,6 +64,7 @@ TEST_F(Vec3OperatorTest, OperatorSubtract)
 
 TEST_F(Vec3OperatorTest, CompoundOperatorAdd)
 {
+    // TODO: fix operator ambiguous
     v1_ += v2_;
     EXPECT_NEAR(v1_[0], 36.8, 0.001);
     EXPECT_NEAR(v1_[1], 237.8, 0.001);

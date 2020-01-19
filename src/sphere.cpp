@@ -30,7 +30,9 @@ auto Sphere::Hit(const Ray& ray, float t_min, float t_max, HitRecord& rec) const
     if (discriminant > 0)
     {
         float t;
-        t = (-b - sqrt(discriminant)) / (2 * a);  // the smaller(closer) root(hit point)
+
+        // the smaller(closer) root(hit point)
+        t = (-b - sqrt(discriminant)) / (2 * a);  
         if (t > t_min && t < t_max)
         {
             rec.t      = t;
@@ -38,7 +40,10 @@ auto Sphere::Hit(const Ray& ray, float t_min, float t_max, HitRecord& rec) const
             rec.normal = (rec.p - center_) / radius_;
             return true;
         }
-        t = (-b + sqrt(discriminant)) / (2 * a);  // the larger(farther) root(hit point)
+
+        // the larger(farther) root(hit point), 
+        // this is for when the camera is in side the sphere 
+        t = (-b + sqrt(discriminant)) / (2 * a);  
         if (t > t_min && t < t_max)
         {
             rec.t      = t;
