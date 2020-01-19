@@ -150,7 +150,8 @@ auto operator/(const Vec3& v, float t) -> Vec3
 
 auto operator==(const Vec3& v1, const Vec3& v2) -> bool
 {
-    if (abs(v1[0] - v2[0]) < 0.0001 && abs(v1[1] - v2[1]) < 0.0001 && abs(v1[2] - v2[2]) < 0.0001)
+    float diff = 0.0001;
+    if (std::fabs(v1[0] - v2[0]) < diff && std::fabs(v1[1] - v2[1]) < diff && std::fabs(v1[2] - v2[2]) < diff)
     {
         return true;
     }
