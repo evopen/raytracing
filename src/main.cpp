@@ -1,5 +1,7 @@
+#include "camera.h"
 #include "hittable.h"
 #include "hittable_list.h"
+#include "random.h"
 #include "ray.h"
 #include "sphere.h"
 #include "vec3.h"
@@ -42,6 +44,7 @@ auto main() noexcept -> int
 
         const int kNx       = 200;  // width
         const int kNy       = 100;  // height
+        const int kSamples  = 100;  // samples count
         const int kMaxColor = 255;
 
         fs << "P3\n" << kNx << ' ' << kNy << "\n255\n" << std::flush;
@@ -69,17 +72,26 @@ auto main() noexcept -> int
 
         HittableList world(&hittables);
 
+        Camera cam;
+
         for (int i = kNy - 1; i >= 0; i--)  // for every row
         {
             for (int j = 0; j < kNx; j++)  // for every column
             {
-                float u = (float) j / kNx;
-                float v = (float) i / kNy;
-                Ray r(origin, Vec3(lower_left_corner + u * horizontal + v * vertical));
-                Vec3 col = Color(r, &world);
-                int ir   = static_cast<int>(col.R() * kMaxColor);
-                int ig   = static_cast<int>(col.G() * kMaxColor);
-                int ib   = static_cast<int>(col.B() * kMaxColor);
+                Vec3 col(0, 0, 0);
+                for (int s = 0; s < kSamples; ++s)
+                {
+                    float u = ((float) j + random::RandomReal(0.F, 1.F)) / kNx;
+                    float v = ((float) i + random::RandomReal(0.F, 1.F)) / kNy;
+
+                    Ray r = cam.GetRay(u, v);
+                    col   = col + Color(r, &world);
+                }
+                col /= kSamples;
+
+                int ir = static_cast<int>(col.R() * kMaxColor);
+                int ig = static_cast<int>(col.G() * kMaxColor);
+                int ib = static_cast<int>(col.B() * kMaxColor);
                 fs << std::setw(3) << ir << ' ' << std::setw(3) << ig << ' ' << std::setw(3) << ib << "\t";
             }
             fs << "\n" << std::flush;
