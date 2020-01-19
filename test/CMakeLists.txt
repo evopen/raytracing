@@ -5,7 +5,8 @@ set(RAYTRACER_SOURCES
 	${SOURCE_DIR}/vec3.cpp
 	${SOURCE_DIR}/sphere.cpp
 	${SOURCE_DIR}/hittable_list.cpp
-	${SOURCE_DIR}/ray.cpp)
+	${SOURCE_DIR}/ray.cpp
+)
 
 add_executable(${BINARY} ${TEST_SOURCES} ${RAYTRACER_SOURCES})
 
