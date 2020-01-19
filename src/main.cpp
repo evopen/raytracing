@@ -81,8 +81,8 @@ auto main() noexcept -> int
                 Vec3 col(0, 0, 0);
                 for (int s = 0; s < kSamples; ++s)
                 {
-                    float u = ((float) j + random::RandomReal(0.F, 1.F)) / kNx;
-                    float v = ((float) i + random::RandomReal(0.F, 1.F)) / kNy;
+                    float u = ((float) j + rt::random::RandomReal(0.F, 1.F)) / kNx;
+                    float v = ((float) i + rt::random::RandomReal(0.F, 1.F)) / kNy;
 
                     Ray r = cam.GetRay(u, v);
                     col   = col + Color(r, &world);
