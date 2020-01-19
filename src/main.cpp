@@ -85,7 +85,7 @@ auto main() noexcept -> int
                     float v = ((float) i + rt::random::RandomReal(0.F, 1.F)) / kNy;
 
                     Ray r = cam.GetRay(u, v);
-                    col   = col + Color(r, &world);
+                    col += Color(r, &world);
                 }
                 col /= kSamples;
 

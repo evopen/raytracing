@@ -23,6 +23,7 @@ public:
     auto operator[](int kI) const -> float;
     auto operator[](int kI) -> float&;
     auto operator+=(Vec3& v) -> Vec3&;
+    auto operator+=(Vec3&& v) -> Vec3&;
     auto operator-=(Vec3& v) -> Vec3&;
     auto operator*=(Vec3& v) -> Vec3&;
     auto operator*=(float t) -> Vec3&;

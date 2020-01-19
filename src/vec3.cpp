@@ -37,6 +37,12 @@ auto Vec3::operator+=(Vec3& v) -> Vec3&
     return *this;
 }
 
+auto Vec3::operator+=(Vec3&& v) -> Vec3&
+{
+    *this += v;
+    return *this;
+}
+
 auto Vec3::operator-=(Vec3& v) -> Vec3&
 {
     e_[0] -= v[0];
