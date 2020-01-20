@@ -6,7 +6,7 @@
 class Camera
 {
 public:
-    // TODO: render ratio has to be adaptive, need flexible Camera
+    // TODO(evopen): render ratio has to be adaptive, need flexible Camera
     Camera() : origin_(0, 0, 0), lower_left_corner_(-2, -1, -1), horizontal_(4, 0, 0), vertical_(0, 2, 0) {}
     auto Origin() -> Vec3 { return origin_; }
     auto LowerLeftCorner() -> Vec3 { return lower_left_corner_; }

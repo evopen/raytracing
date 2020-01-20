@@ -22,7 +22,7 @@ auto Color(const Ray& ray, Hittable* hittable) -> Vec3
 {
     HitRecord rec;
 
-    if (hittable->Hit(ray, 0.001, std::numeric_limits<float>::max(), rec))
+    if (hittable->Hit(ray, 0.001, std::numeric_limits<float>::max(), &rec))
     {
         Vec3 diffuse_direction = rec.p + rec.normal + RandomInUnitSphere() - rec.p;
         Ray diffuse_ray(rec.p, diffuse_direction);
@@ -98,6 +98,7 @@ auto main() noexcept -> int
                 }
                 col /= kSamples;
                 col = Vec3(sqrt(col[0]), sqrt(col[1]), sqrt(col[2]));
+
                 int ir = static_cast<int>(col.R() * kMaxColor);
                 int ig = static_cast<int>(col.G() * kMaxColor);
                 int ib = static_cast<int>(col.B() * kMaxColor);

@@ -12,5 +12,5 @@ struct HitRecord
 class Hittable
 {
 public:
-    virtual auto Hit(const Ray& ray, float t_min, float t_max, HitRecord& rec) const -> bool = 0;
+    virtual auto Hit(const Ray& ray, float t_min, float t_max, HitRecord* rec) const -> bool = 0;
 };

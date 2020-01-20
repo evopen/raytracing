@@ -32,7 +32,7 @@ TEST(HittableListTest, Hit)
     HitRecord rec;
     Ray ray(Vec3(0, 0, 0), Vec3(1, 0, 0));
 
-    EXPECT_TRUE(world.Hit(ray, 0, FLT_MAX, rec));
+    EXPECT_TRUE(world.Hit(ray, 0, FLT_MAX, &rec));
     EXPECT_NEAR(rec.normal[0], -1, 0.001);
     EXPECT_NEAR(rec.normal[1], 0, 0.001);
     EXPECT_NEAR(rec.normal[2], 0, 0.001);

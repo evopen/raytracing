@@ -7,7 +7,7 @@ class Sphere : public Hittable
 public:
     Sphere() = default;
     Sphere(Vec3 center, float radius) : center_(center), radius_(radius) {}
-    auto Hit(const Ray& ray, float t_min, float t_max, HitRecord& rec) const -> bool override;
+    auto Hit(const Ray& ray, float t_min, float t_max, HitRecord* rec) const -> bool override;
 
     auto Center() -> Vec3 { return center_; }
     auto SetCenter(const Vec3& center) -> void { center_ = center; }

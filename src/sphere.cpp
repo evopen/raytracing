@@ -1,6 +1,6 @@
 #include "sphere.h"
 
-auto Sphere::Hit(const Ray& ray, float t_min, float t_max, HitRecord& rec) const -> bool
+auto Sphere::Hit(const Ray& ray, float t_min, float t_max, HitRecord* rec) const -> bool
 {
     // A(ray.Origin()): Ray Origin
     // B(ray.Direction()): Ray Direction
@@ -32,23 +32,23 @@ auto Sphere::Hit(const Ray& ray, float t_min, float t_max, HitRecord& rec) const
         float t;
 
         // the smaller(closer) root(hit point)
-        t = (-b - sqrt(discriminant)) / (2 * a);  
+        t = (-b - sqrt(discriminant)) / (2 * a);
         if (t > t_min && t < t_max)
         {
-            rec.t      = t;
-            rec.p      = ray.PointAtParameter(t);
-            rec.normal = (rec.p - center_) / radius_;
+            rec->t      = t;
+            rec->p      = ray.PointAtParameter(t);
+            rec->normal = (rec->p - center_) / radius_;
             return true;
         }
 
-        // the larger(farther) root(hit point), 
-        // this is for when the camera is in side the sphere 
-        t = (-b + sqrt(discriminant)) / (2 * a);  
+        // the larger(farther) root(hit point),
+        // this is for when the camera is in side the sphere
+        t = (-b + sqrt(discriminant)) / (2 * a);
         if (t > t_min && t < t_max)
         {
-            rec.t      = t;
-            rec.p      = ray.PointAtParameter(t);
-            rec.normal = (rec.p - center_) / radius_;
+            rec->t      = t;
+            rec->p      = ray.PointAtParameter(t);
+            rec->normal = (rec->p - center_) / radius_;
             return true;
         }
     }
