@@ -35,9 +35,10 @@ auto Sphere::Hit(const Ray& ray, float t_min, float t_max, HitRecord* rec) const
         t = (-b - sqrt(discriminant)) / (2 * a);
         if (t > t_min && t < t_max)
         {
-            rec->t      = t;
-            rec->p      = ray.PointAtParameter(t);
-            rec->normal = (rec->p - center_) / radius_;
+            rec->t        = t;
+            rec->p        = ray.PointAtParameter(t);
+            rec->normal   = (rec->p - center_) / radius_;
+            rec->material = material_;
             return true;
         }
 
@@ -46,9 +47,10 @@ auto Sphere::Hit(const Ray& ray, float t_min, float t_max, HitRecord* rec) const
         t = (-b + sqrt(discriminant)) / (2 * a);
         if (t > t_min && t < t_max)
         {
-            rec->t      = t;
-            rec->p      = ray.PointAtParameter(t);
-            rec->normal = (rec->p - center_) / radius_;
+            rec->t        = t;
+            rec->p        = ray.PointAtParameter(t);
+            rec->normal   = (rec->p - center_) / radius_;
+            rec->material = material_;
             return true;
         }
     }

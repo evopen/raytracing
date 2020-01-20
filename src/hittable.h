@@ -1,5 +1,6 @@
 #pragma once
 
+#include "material.h"
 #include "ray.h"
 
 struct HitRecord
@@ -7,6 +8,7 @@ struct HitRecord
     float t;  // coefficient to ray direction
     Vec3 p;  // hit point
     Vec3 normal;
+    rt::Material* material;
 };
 
 class Hittable

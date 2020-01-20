@@ -8,7 +8,8 @@ namespace rt
     {
     public:
         Lambertian(const Vec3& albedo) : albedo_(albedo) {}
-        auto Scatter(const Ray& ray_in, const HitRecord& rec, Vec3* attenuation, Ray* ray_out) const -> bool override;
+        bool Scatter(const Ray& ray_in, const Vec3& hit_point, const Vec3& normal, Vec3* attenuation,
+            Ray* ray_out) const override;
 
     private:
         Vec3 albedo_;

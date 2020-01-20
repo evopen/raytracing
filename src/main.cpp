@@ -1,6 +1,8 @@
 #include "camera.h"
 #include "hittable.h"
 #include "hittable_list.h"
+#include "lambertian.h"
+#include "metal.h"
 #include "random.h"
 #include "ray.h"
 #include "sphere.h"
@@ -12,21 +14,23 @@
 #include <iostream>
 #include <limits>
 
-auto RandomInUnitSphere() -> Vec3
-{
-    Vec3 random_vec(rt::random::RandomReal(-1., 1.), rt::random::RandomReal(-1., 1.), rt::random::RandomReal(-1., 1.));
-    return UnitVector(random_vec);
-}
 
-auto Color(const Ray& ray, Hittable* hittable) -> Vec3
+auto Color(const Ray& ray, Hittable* hittable, int depth) -> Vec3
 {
     HitRecord rec;
 
     if (hittable->Hit(ray, 0.001, std::numeric_limits<float>::max(), &rec))
     {
-        Vec3 diffuse_direction = rec.p + rec.normal + RandomInUnitSphere() - rec.p;
-        Ray diffuse_ray(rec.p, diffuse_direction);
-        return 0.5 * Color(diffuse_ray, hittable);
+        Ray scattered;
+        Vec3 attenuation;
+        if (depth < 50 && rec.material->Scatter(ray, rec.p, rec.normal, &attenuation, &scattered))
+        {
+            return attenuation * Color(scattered, hittable, depth + 1);
+        }
+        else
+        {
+            return Vec3(0, 0, 0);
+        }
     }
     Vec3 direction    = UnitVector(ray.Direction());
     float color_ratio = 0.5 * (direction.Y() + 1.F);
@@ -49,8 +53,8 @@ auto main() noexcept -> int
         }
         fs.fill('0');
 
-        const int kNx       = 800;  // width
-        const int kNy       = 400;  // height
+        const int kNx       = 200;  // width
+        const int kNy       = 100;  // height
         const int kSamples  = 32;  // samples count
         const int kMaxColor = 255;
 
@@ -69,13 +73,11 @@ auto main() noexcept -> int
         fs.seekp(pos);
         fs.flush();
 
-
-        Sphere small_sphere(Vec3(0, 0, -1), 0.5);
-        Sphere big_sphere(Vec3(0, -100.5, -1), 100);
-
         std::vector<Hittable*> hittables;
-        hittables.push_back(&small_sphere);
-        hittables.push_back(&big_sphere);
+        hittables.push_back(new Sphere(Vec3(0, 0, -1), 0.5, new rt::Lambertian(Vec3(0.8, 0.3, 0.3))));
+        hittables.push_back(new Sphere(Vec3(0, -100.5, -1), 100, new rt::Lambertian(Vec3(0.8, 0.8, 0.0))));
+        hittables.push_back(new Sphere(Vec3(1, 0, -1), 0.2, new rt::Metal(Vec3(0.8, 0.6, 0.2), 0.2)));
+        hittables.push_back(new Sphere(Vec3(-1, 0, -1), 0.5, new rt::Metal(Vec3(0.8, 0.8, 0.8), 0.8)));
 
         HittableList world(&hittables);
 
@@ -94,7 +96,7 @@ auto main() noexcept -> int
                     float v = ((float) i + rt::random::RandomReal(0.F, 1.F)) / kNy;
 
                     Ray r = cam.GetRay(u, v);
-                    col += Color(r, &world);
+                    col += Color(r, &world, 0);
                 }
                 col /= kSamples;
                 col = Vec3(sqrt(col[0]), sqrt(col[1]), sqrt(col[2]));

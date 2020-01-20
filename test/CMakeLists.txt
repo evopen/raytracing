@@ -7,6 +7,7 @@ set(RAYTRACER_SOURCES
 	${SOURCE_DIR}/hittable_list.cpp
 	${SOURCE_DIR}/ray.cpp
 	${SOURCE_DIR}/camera.cpp
+	${SOURCE_DIR}/lambertian.cpp
 )
 
 add_executable(${BINARY} ${TEST_SOURCES} ${RAYTRACER_SOURCES})
