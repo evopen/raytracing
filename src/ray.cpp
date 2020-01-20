@@ -19,3 +19,8 @@ auto Ray::PointAtParameter(float t) const -> Vec3
 {
     return origin_ + t * direction_;
 }
+
+auto Reflect(const Vec3& v, const Vec3& n) -> Vec3
+{
+    return v - 2 * Dot(v, n) * n;
+}

@@ -16,3 +16,5 @@ private:
     Vec3 origin_;
     Vec3 direction_;
 };
+
+auto Reflect(const Vec3& v, const Vec3& n) -> Vec3;

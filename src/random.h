@@ -1,5 +1,7 @@
 #pragma once
 
+#include "vec3.h"
+
 #include <random>
 
 namespace rt::random
@@ -13,5 +15,12 @@ namespace rt::random
         std::uniform_real_distribution<T> distribution(min, max);
         auto rand_generator = [&]() -> T { return distribution(mt); };
         return rand_generator();
+    }
+
+    inline auto RandomInUnitSphere() -> Vec3
+    {
+        Vec3 random_vec(
+            rt::random::RandomReal(-1., 1.), rt::random::RandomReal(-1., 1.), rt::random::RandomReal(-1., 1.));
+        return UnitVector(random_vec);
     }
 }
